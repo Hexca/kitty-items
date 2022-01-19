@@ -18,6 +18,9 @@ export default function ListItemImage({
   isStoreItem,
   children,
 }) {
+  if (typeof typeId === "undefined" || typeof rarityId === "undefined")
+    return <div className="w-full" />
+
   const typeString = typeId === 0 ? "question" : ITEM_TYPE_MAP[typeId]
   const rarityString = rarityId === 0 ? "gray" : ITEM_RARITY_MAP[rarityId]
   const name = [rarityString, typeString].join(" ")
@@ -39,8 +42,8 @@ export default function ListItemImage({
 }
 
 ListItemImage.propTypes = {
-  typeId: PropTypes.number.isRequired,
-  rarityId: PropTypes.number.isRequired,
+  typeId: PropTypes.number,
+  rarityId: PropTypes.number,
   size: PropTypes.string,
   classes: PropTypes.string,
   grayscale: PropTypes.bool,

@@ -26,5 +26,5 @@ export default function ProfileAccountItems({address}) {
 }
 
 ProfileAccountItems.propTypes = {
-  address: PropTypes.string.isRequired,
+  address: PropTypes.string,
 }

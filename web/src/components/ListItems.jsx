@@ -14,7 +14,7 @@ export default function ListItems({items, Component = ListItem}) {
     <div className={listItemsRootClasses}>
       {items.map(item => (
         <Component
-          key={item.itemID}
+          key={`${item.itemID}-${item.resourceID}`}
           address={item.owner}
           id={item.itemID}
           price={item.price ? parseFloat(item.price) : undefined}

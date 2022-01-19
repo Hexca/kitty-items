@@ -1,5 +1,6 @@
 import Link from "next/link"
 import {useRouter} from "next/router"
+import PropTypes from "prop-types"
 import {useEffect, useState} from "react"
 import ListItems from "src/components/ListItems"
 import MarketplaceFilters from "src/components/MarketplaceFilters"
@@ -50,13 +51,15 @@ const MainContent = ({queryState}) => {
 
       <hr className="pt-1 mb-8" />
 
-      <MarketplaceFilters queryState={queryState} updateQuery={updateQuery} />
+      {typeof queryState !== "undefined" && (
+        <MarketplaceFilters queryState={queryState} updateQuery={updateQuery} />
+      )}
 
       {!!listings && <ListItems items={listings} />}
 
       {data?.total !== undefined && (
         <Pagination
-          currentPage={queryState.page}
+          currentPage={queryState?.page || 1}
           total={data.total}
           perPage={PER_PAGE}
           onPageClick={onPageClick}
@@ -85,11 +88,13 @@ export default function Marketplace() {
       <PageTitle>Marketplace</PageTitle>
       <main>
         <div>
-          {typeof queryState !== "undefined" && (
-            <MainContent queryState={queryState} />
-          )}
+          <MainContent queryState={queryState} />
         </div>
       </main>
     </div>
   )
+}
+
+MainContent.propTypes = {
+  queryState: PropTypes.object,
 }
